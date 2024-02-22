@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="MVVM\UI\Fonts\Poppins-Black.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-BlackItalic.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-Bold.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-BoldItalic.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-ExtraBold.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-ExtraBoldItalic.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-ExtraLight.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-ExtraLightItalic.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-Italic.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-Light.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-LightItalic.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-Medium.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-MediumItalic.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-Regular.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-SemiBold.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-SemiBoldItalic.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-Thin.ttf" />
+    <None Remove="MVVM\UI\Fonts\Poppins-ThinItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.28" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="MahApps.Metro.IconPacks.BootstrapIcons" Version="4.11.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="MySql.Data" Version="8.3.0" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="MVVM\UI\Fonts\Poppins-Black.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-BlackItalic.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-Bold.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-BoldItalic.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-ExtraBold.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-ExtraBoldItalic.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-ExtraLight.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-ExtraLightItalic.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-Italic.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-Light.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-LightItalic.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-Medium.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-MediumItalic.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-Regular.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-SemiBold.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-SemiBoldItalic.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-Thin.ttf" />
+    <Resource Include="MVVM\UI\Fonts\Poppins-ThinItalic.ttf" />
+  </ItemGroup>
+
+</Project>

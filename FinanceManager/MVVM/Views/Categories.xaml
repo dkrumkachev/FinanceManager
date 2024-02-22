@@ -1,0 +1,166 @@
+﻿<UserControl x:Class="FinanceManager.MVVM.Views.Categories"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:s="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:FinanceManager.MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" 
+             d:DesignWidth="1024"
+             FontFamily="/MVVM/UI/Fonts/#Poppins"
+             Background="Transparent"
+             Foreground="White">
+    <Grid Margin="15 25">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="19"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Line Grid.RowSpan="2" Grid.Column="1" 
+              X1="10" Y1="5"
+              X2="10" Y2="1000"
+              Stroke="#383838"
+              StrokeThickness="2"/>
+        <StackPanel>
+            <TextBlock Text="Expenses"
+                       FontSize="22"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            <Button HorizontalAlignment="Center"
+                    Style="{StaticResource GreenButtonStyle}"
+                    Foreground="#00ba00"
+                    Margin="0 5"
+                    Command="{Binding NewCategoryCommand}">
+                <Button.CommandParameter>
+                    <s:Boolean>True</s:Boolean>
+                </Button.CommandParameter>
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconBootstrapIcons Kind="PlusCircle"
+                                                 Width="25" Height="25"/>
+                    <TextBlock Text="New category"
+                               Padding="10 0 0 0"
+                               VerticalAlignment="Center"
+                               FontSize="16"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3">
+            <TextBlock Text="Income"
+                       Grid.Column="2"
+                       FontSize="22"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            <Button Grid.Row="1"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource GreenButtonStyle}"
+                    Foreground="#00ba00"
+                    Margin="0 5"
+                    Command="{Binding NewCategoryCommand}">
+                <Button.CommandParameter>
+                    <s:Boolean>False</s:Boolean>
+                </Button.CommandParameter>
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconBootstrapIcons Kind="PlusCircle"
+                                                 Width="25" Height="25"/>
+                    <TextBlock Text="New category"
+                               Padding="10 0 0 0"
+                               VerticalAlignment="Center"
+                               FontSize="16"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <DataGrid Grid.Row="1"
+                  Style="{DynamicResource DataGridStyle1}" 
+                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  RowStyle="{DynamicResource DataGridRowStyle1}"
+                  FontSize="18"
+                  ItemsSource="{Binding ExpenseCategories}"
+                  Name="ExpensesDataGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Category" 
+                                    IsReadOnly="True"
+                                    Width="*"
+                                    x:Name="CategoryName"
+                                    Binding="{Binding Path=Name, Mode=OneTime}"/>
+                <DataGridTemplateColumn Header="Operations" 
+                                        IsReadOnly="True"
+                                        CanUserResize="False"
+                                        Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" 
+                                        HorizontalAlignment="Right">
+                                <Button Style="{StaticResource GridEditButton}"
+                                        Cursor="Hand"
+                                        Command="{Binding DataContext.EditCategoryCommand, 
+                                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding}">
+                                    <icon:PackIconBootstrapIcons Kind="Pencil" Style="{StaticResource GridButtonIcon}"/>
+                                </Button>
+                                <Button Style="{StaticResource GridRemoveButton}"
+                                        Cursor="Hand"
+                                        Margin="5 0 0 0"
+                                        Command="{Binding DataContext.DeleteCategoryCommand, 
+                                                  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding}">
+                                    <icon:PackIconBootstrapIcons Kind="Trash" Style="{StaticResource GridButtonIcon}"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="1" Grid.Column="3"
+                  Style="{DynamicResource DataGridStyle1}" 
+                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  RowStyle="{DynamicResource DataGridRowStyle1}"
+                  FontSize="18"
+                  ItemsSource="{Binding IncomeCategories}"
+                  Name="IncomeDataGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Category" 
+                                    IsReadOnly="True"
+                                    Width="*"
+                                    Binding="{Binding Path=Name, Mode=OneTime}"/>
+                <DataGridTemplateColumn Header="Operations" 
+                                        IsReadOnly="True"
+                                        CanUserResize="False"
+                                        Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Right">
+                                <Button Style="{StaticResource GridEditButton}"
+                                        Cursor="Hand"
+                                        Command="{Binding DataContext.EditCategoryCommand, 
+                                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding}">
+                                    <icon:PackIconBootstrapIcons Kind="Pencil" Style="{StaticResource GridButtonIcon}"/>
+                                </Button>
+                                <Button Style="{StaticResource GridRemoveButton}"
+                                        Cursor="Hand"
+                                        Margin="5 0 0 0"
+                                        Command="{Binding DataContext.DeleteCategoryCommand, 
+                                                  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding}">
+                                    <icon:PackIconBootstrapIcons Kind="Trash" Style="{StaticResource GridButtonIcon}"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

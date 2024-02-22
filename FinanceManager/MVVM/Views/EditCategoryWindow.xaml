@@ -1,0 +1,53 @@
+﻿<Window x:Class="FinanceManager.MVVM.Views.EditCategoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanceManager.MVVM.Views"
+        mc:Ignorable="d"
+        Height="125" 
+        Width="260"
+        WindowStyle="None"
+        WindowStartupLocation="Manual"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        Foreground="White"
+        AllowsTransparency="True"
+        FontFamily="/MVVM/UI/Fonts/#Poppins"
+        FontSize="16">
+    <Border Background="#201f20"
+            BorderBrush="White"
+            BorderThickness="1"
+        CornerRadius="10">
+        <Grid Margin="15 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding CategoryToFill.Name}"/>
+            <TextBlock  Grid.Row="1"
+                        Text="{Binding ErrorMessage}"
+                        Name="ErrorMessage"
+                        Height="0"
+                        FontSize="14"
+                        HorizontalAlignment="Center"
+                        TextWrapping="Wrap"
+                        Foreground="Red"/>
+            <UniformGrid Grid.Row="2"
+                         Rows="1" Columns="2"
+                         MaxHeight="35">
+                <Button Content="Save" Margin="0 0 5 0" 
+                        Style="{StaticResource GreenFormButtonStyle}"
+                        Command="{Binding SaveCategoryCommand}"/>
+                <Button Content="Cancel" Margin="5 0 0 0"
+                        IsCancel="True"
+                        Click="CancelButtonClick"
+                        Style="{StaticResource GrayFormButtonStyle}" />
+            </UniformGrid>
+        </Grid>
+    </Border>
+</Window>
+

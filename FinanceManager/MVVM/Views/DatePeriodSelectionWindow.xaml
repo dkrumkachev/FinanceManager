@@ -1,0 +1,63 @@
+﻿<Window x:Class="FinanceManager.MVVM.Views.DatePeriodSelectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanceManager.MVVM.Views"
+        mc:Ignorable="d"
+        Title="DatePeriodSelectionWindow" 
+        Height="115" 
+        Width="440"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        Foreground="White"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="/MVVM/UI/Fonts/#Poppins"
+        FontSize="16">
+    <Border Background="#1e1e1e"
+        CornerRadius="5">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="From:"
+                           Margin="0 0 10 0"
+                           VerticalAlignment="Center"/>
+                <DatePicker Width="150" 
+                            Style="{StaticResource DatePickerStyle}"
+                            SelectedDate="{Binding Path=CustomPeriodStart}"/>
+                <TextBlock Text="To:"
+                           Margin="20 0 10 0"
+                           VerticalAlignment="Center"/>
+                <DatePicker Width="150" 
+                            Style="{StaticResource DatePickerStyle}"
+                            SelectedDate="{Binding Path=CustomPeriodEnd}"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="OK"
+                        Width="90" Height="30"
+                        VerticalAlignment="Center"
+                        Click="OkButton_Click"
+                        Margin="5 0"
+                        Style="{StaticResource GreenFormButtonStyle}"/>
+                <Button Content="Cancel"
+                        Width="90" Height="30"
+                        VerticalAlignment="Center"
+                        Click="CancelButton_Click"
+                        Margin="5 0"
+                        Style="{StaticResource GrayFormButtonStyle}"/>
+            </StackPanel>
+            
+        </Grid>
+
+    </Border>
+</Window>

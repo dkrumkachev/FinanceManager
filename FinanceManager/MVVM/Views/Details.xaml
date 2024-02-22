@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="FinanceManager.MVVM.Views.Details"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FinanceManager.MVVM.Views"
+             xmlns:converters="clr-namespace:FinanceManager.MVVM.Converters"
+             xmlns:enums="clr-namespace:FinanceManager.MVVM.Enums"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" 
+             d:DesignWidth="1024"
+             Foreground="White"
+             FontFamily="/MVVM/UI/Fonts/#Poppins"
+             FontSize="16">
+    <Grid Margin="10"
+          Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.8*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <RadioButton Content="Today"
+                         IsChecked="{Binding SelectedPeriod, Converter={converters:RadioButtonValueConverter {x:Static enums:Period.Today}}}"
+                         Margin="20 0"
+                         Command="{Binding ChangePeriodCommand}"
+                         Style="{StaticResource PeriodButtonStyle}"/>
+            <RadioButton Content="1 Week"
+                         Margin="20 0"
+                         IsChecked="{Binding SelectedPeriod, Converter={converters:RadioButtonValueConverter {x:Static enums:Period.Week}}}"
+                         Command="{Binding ChangePeriodCommand}"
+                         Style="{StaticResource PeriodButtonStyle}"/>
+            <RadioButton Content="1 Month"
+                         Margin="20 0"
+                         IsChecked="{Binding SelectedPeriod, Converter={converters:RadioButtonValueConverter {x:Static enums:Period.Month}}}"
+                         Command="{Binding ChangePeriodCommand}"
+                         Style="{StaticResource PeriodButtonStyle}"/>
+            <RadioButton Content="1 Year"
+                         Margin="20 0"
+                         IsChecked="{Binding SelectedPeriod, Converter={converters:RadioButtonValueConverter {x:Static enums:Period.Year}}}"
+                         Command="{Binding ChangePeriodCommand}"
+                         Style="{StaticResource PeriodButtonStyle}"/>
+            <RadioButton Content="Select period..."
+                         Margin="20 0"
+                         IsChecked="{Binding SelectedPeriod, Converter={converters:RadioButtonValueConverter {x:Static enums:Period.Custom}}}"
+                         Command="{Binding SelectCustomPeriodCommand}"
+                         CommandParameter="{Binding SelectedPeriod}"
+                         Style="{StaticResource PeriodButtonStyle}"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" 
+                   MaxWidth="230"
+                   Padding="0 0 0 30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextAlignment="Center"
+                   FontSize="24"
+                   TextWrapping="WrapWithOverflow"
+                   Text="Total: ">
+            <Run Text="{Binding TotalAmount}"/>
+        </TextBlock>
+        <lvc:PieChart Grid.Row="1"
+                      LegendLocation="Bottom"
+                      DataClickCommand=""
+                      Series="{Binding TransactionsByCategories}"
+                      Hoverable="True"
+                      InnerRadius="115"
+                      Margin="45">
+            <lvc:PieChart.ChartLegend>
+                <lvc:DefaultLegend FontSize="16" 
+                                   BulletSize="25"
+                                   HorizontalAlignment="Right"
+                                   HorizontalContentAlignment="Stretch"/>
+            </lvc:PieChart.ChartLegend>
+            <lvc:PieChart.DataTooltip>
+                <lvc:DefaultTooltip Background="#161616" 
+                                    CornerRadius="15" 
+                                    FontSize="16"
+                                    BulletSize="30"/>
+            </lvc:PieChart.DataTooltip>
+        </lvc:PieChart>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock FontSize="18"
+                       FontWeight="SemiBold"
+                       Padding="5 0"
+                       VerticalAlignment="Center">
+                <Run Text="{Binding Transactions.Count, Mode=OneWay}"/>
+                <Run Text=" Transactions"/>
+            </TextBlock>
+            <DataGrid Grid.Row="2"
+                      Style="{DynamicResource DataGridStyle1}" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      RowStyle="{DynamicResource DataGridRowStyle1}" 
+                      RowDetailsVisibilityMode="Visible"
+                      Name="TransactionsDataGrid"
+                      ItemsSource="{Binding Transactions}">
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" 
+                                   Background="Transparent"
+                                   Foreground="#bbbbbb"
+                                   FontSize="15"
+                                   Margin="7 0"/>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" 
+                                        IsReadOnly="True"
+                                        Width="200"
+                                        Binding="{Binding Path=Date, StringFormat='{}{0:MMMM dd, yyyy}'}"/>  
+                    <DataGridTextColumn Header="Category" 
+                                        IsReadOnly="True"
+                                        Width="1.3*"
+                                        Binding="{Binding Path=Category.Name}"/>
+                    <DataGridTextColumn Header="Amount" 
+                                        IsReadOnly="True"
+                                        Width="1*"
+                                        Binding="{Binding Path=Amount}"/>
+                    <DataGridTemplateColumn Header="" 
+                                            IsReadOnly="True"
+                                            CanUserResize="False"
+                                            Width="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                    <Button Style="{StaticResource GridEditButton}"
+                                            Cursor="Hand"
+                                            Command="{Binding DataContext.EditTransactionCommand, 
+                                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding}">
+                                        <icon:PackIconBootstrapIcons Kind="Pencil" Style="{StaticResource GridButtonIcon}"/>
+                                    </Button>
+                                    <Button Style="{StaticResource GridRemoveButton}"
+                                            Margin="5 0 0 0"
+                                            Cursor="Hand"
+                                            Command="{Binding DataContext.DeleteTransactionCommand, 
+                                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding}">
+                                        <icon:PackIconBootstrapIcons Kind="Trash" Style="{StaticResource GridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+ 
+</UserControl>

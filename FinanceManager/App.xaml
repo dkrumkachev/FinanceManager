@@ -1,0 +1,30 @@
+﻿<Application x:Class="FinanceManager.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FinanceManager"
+             xmlns:viewModel="clr-namespace:FinanceManager.MVVM.ViewModels"
+             xmlns:view="clr-namespace:FinanceManager.MVVM.Views"
+             xmlns:converter="clr-namespace:FinanceManager.MVVM.Converters">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MVVM/UI/Styles/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="MVVM/UI/Styles/DataGridStyle.xaml"/>
+                <ResourceDictionary Source="MVVM/UI/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="MVVM/UI/Styles/RadioButtonStyle.xaml"/>
+                <ResourceDictionary Source="MVVM/UI/Styles/DatePickerStyle.xaml"/>
+                <ResourceDictionary Source="MVVM/UI/Styles/ComboBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewModel:ExpensesDetailsViewModel}">
+                <view:Details/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:IncomeDetailsViewModel}">
+                <view:Details/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:CategoriesViewModel}">
+                <view:Categories/>
+            </DataTemplate>
+            <converter:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
